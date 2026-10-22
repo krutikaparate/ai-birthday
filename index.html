@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c1024">
+  <meta name="description" content="A tiny love-coded birthday universe, made just for you.">
+  <title>LOVE.ai — Neural Birthday Protocol</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1020;--ink:#f9f1ff;--muted:#b7bed5;--pink:#ff9cce;--mint:#9df4d7;--lav:#c5b8ff;--yellow:#ffe4a8;--panel:rgba(22,29,52,.84);--border:rgba(255,255,255,.14);--shadow:0 24px 85px rgba(0,0,0,.34)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;font:16px/1.55 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(circle at 88% 3%,#413260 0%,transparent 30%),radial-gradient(circle at 3% 31%,#144b4a 0%,transparent 35%),linear-gradient(153deg,#10162a,#0b1020 70%);overflow-x:hidden}
+    body:before{content:"";pointer-events:none;position:fixed;inset:0;opacity:.23;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:37px 47px;mask-image:linear-gradient(to bottom,#000,transparent 90%)}
+    button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}button:disabled{cursor:default;opacity:.6}a{color:var(--mint)}.shell{max-width:1160px;margin:0 auto;padding:24px 21px 90px;position:relative;z-index:1}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 0 26px}.brand{font:800 19px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:-.6px}.brand span{color:var(--pink)}.small-status{font:700 11px/1.4 ui-monospace,monospace;letter-spacing:.1em;color:var(--mint);border:1px solid rgba(157,244,215,.32);border-radius:99px;padding:9px 12px}.music-control{display:flex;align-items:center;gap:8px}.pill{border:1px solid var(--border);border-radius:99px;background:rgba(255,255,255,.06);color:#fff;padding:11px 15px;font-size:13px;font-weight:800;transition:.2s}.pill:hover,.soft-button:hover{transform:translateY(-2px);border-color:var(--pink)}
+    .hero{text-align:center;padding:34px 0 33px}.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border:1px solid rgba(255,156,206,.4);border-radius:99px;background:rgba(255,156,206,.1);color:#ffd4e7;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.hero h1{font-size:clamp(41px,7.2vw,82px);letter-spacing:-.065em;line-height:1.04;margin:23px auto 17px;max-width:990px}.gradient{background:linear-gradient(100deg,#ffaad2,#edd1ff 57%,#a8f7db);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{max-width:620px;margin:0 auto;color:#d7d9e7;font-size:clamp(15px,2vw,19px)}.hearts{font-size:30px;letter-spacing:10px;line-height:1.7;margin-top:17px;animation:bob 3.5s ease-in-out infinite}
+    .terminal{overflow:hidden;border-radius:20px;border:1px solid rgba(157,244,215,.3);box-shadow:var(--shadow),0 0 45px rgba(92,226,188,.07);background:#0a1222}.term-top{height:47px;display:flex;align-items:center;gap:14px;padding:0 18px;background:#1c2739;border-bottom:1px solid rgba(255,255,255,.08)}.dots{display:flex;gap:6px}.dots i{display:block;width:11px;height:11px;border-radius:50%;background:#ff819b}.dots i:nth-child(2){background:#ffe08b}.dots i:nth-child(3){background:#8ce7bf}.term-title{flex:1;text-align:center;color:#b7c4d7;font:700 12px ui-monospace,Menlo,monospace}.term-body{padding:24px 25px 23px;min-height:235px;background:repeating-linear-gradient(to bottom,transparent 0px,transparent 3px,rgba(255,255,255,.009) 4px);font:15px/1.8 ui-monospace,Menlo,Consolas,monospace;color:var(--mint)}.term-line{white-space:pre-wrap;overflow-wrap:anywhere}.term-line .pref{color:var(--pink)}.term-line .dim{color:#87a8ab}.cursor{display:inline-block;height:1em;width:8px;margin-left:3px;background:var(--mint);vertical-align:-2px;animation:blink 1.1s steps(2) infinite}.term-footer{display:flex;flex-wrap:wrap;gap:11px;align-items:center;padding:15px 20px;background:rgba(27,40,62,.8);border-top:1px solid rgba(255,255,255,.07)}.term-footer label{font:750 12px ui-monospace,monospace;color:var(--lav);letter-spacing:.09em}.codebox{min-width:135px;max-width:190px;flex:1;background:#0d1527;color:#fff;border:1px solid rgba(197,184,255,.37);border-radius:10px;padding:11px 13px;text-transform:uppercase;letter-spacing:.2em}.btn{border:0;border-radius:11px;padding:12px 18px;font-size:13px;font-weight:900;letter-spacing:.02em;background:linear-gradient(110deg,#ffa8d3,#c6b9ff);color:#20172c;box-shadow:0 7px 25px rgba(255,156,206,.16);transition:transform .2s,filter .2s}.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}.msg{color:var(--yellow);font-size:12px;min-height:18px;flex-basis:100%}.tiny{font-size:12px;color:#aab4c7;margin:10px 4px 0}.success{color:var(--mint)}
+    .section-heading{margin:48px auto 22px;text-align:center}.section-heading h2{font-size:clamp(25px,3vw,35px);letter-spacing:-.045em;line-height:1.15;margin:0 0 9px}.section-heading p{color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.tile{position:relative;border:1px solid var(--border);background:var(--panel);padding:24px;border-radius:19px;box-shadow:0 12px 35px rgba(0,0,0,.1);overflow:hidden}.tile:before{content:"";position:absolute;width:140px;height:140px;border-radius:100%;top:-90px;right:-60px;background:var(--pink);filter:blur(55px);opacity:.14}.tile h3{font-size:19px;letter-spacing:-.02em;margin:8px 0}.tile p{color:#c8cfdf;font-size:14px;margin:0 0 17px}.tile .iconish{font-size:31px}.soft-button{border:1px solid rgba(255,156,206,.45);border-radius:11px;padding:10px 14px;background:rgba(255,156,206,.09);color:#ffd4e8;font-weight:850;font-size:12px;transition:.2s}.soft-button[disabled]{opacity:.45}.unlock-needed{font-size:12px;color:#bdc0d6;margin:11px 0 0}
+    .panel{border:1px solid var(--border);background:var(--panel);border-radius:19px;padding:25px;box-shadow:var(--shadow);margin-top:20px}.panel h3{margin:0 0 12px;font-size:22px;letter-spacing:-.03em}.letter{max-width:680px;margin:12px auto 0;padding:22px 25px;background:linear-gradient(135deg,#fff8f1,#f9edfc);color:#4c345a;border-radius:12px;box-shadow:0 15px 40px rgba(0,0,0,.17);white-space:pre-line;font-size:16px;line-height:1.8;transform-origin:top;animation:openLetter .5s ease both}.letter .signature{font-weight:800;color:#a04783}.memory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.memory{padding:24px 18px;border:1px dashed rgba(255,255,255,.24);border-radius:16px;background:linear-gradient(140deg,rgba(255,156,206,.11),rgba(197,184,255,.05))}.memory .stamp{font-size:30px}.memory h4{font-size:17px;margin:9px 0 6px}.memory p{color:#cdd3e3;margin:0;font-size:14px}
+    .game{position:relative;height:235px;border:1px dashed rgba(255,156,206,.34);border-radius:15px;background:radial-gradient(circle at center,rgba(255,156,206,.1),transparent 65%),#131d34;overflow:hidden;touch-action:manipulation}.heart-target{position:absolute;border:0;background:rgba(255,255,255,.1);border-radius:50%;width:67px;height:67px;font-size:33px;box-shadow:0 6px 22px rgba(255,100,160,.25);animation:pulse 1.4s ease-in-out infinite;transition:top .28s,left .28s}.progress-track{background:#293047;height:11px;border-radius:20px;margin:15px 0 8px;overflow:hidden}.progress-fill{width:0;height:100%;border-radius:20px;background:linear-gradient(90deg,var(--pink),var(--mint));transition:width .2s}.goal-line{color:var(--muted);font-size:13px}
+    .cake-stage{text-align:center;margin:15px auto;max-width:390px}.cake-stage svg{max-width:100%;overflow:visible}.flame{cursor:pointer;transform-origin:center;animation:flicker .9s ease-in-out infinite alternate}.flame.off{opacity:0;pointer-events:none}.candle-hotspot{cursor:pointer;outline:0}.candle-hotspot:focus-visible rect{stroke:#fff;stroke-width:3}.wishes{color:var(--yellow);font-weight:800;min-height:25px;margin:0}
+    .endcap{text-align:center;padding:32px 21px;margin:55px auto 0;border:1px solid rgba(255,156,206,.3);border-radius:23px;background:linear-gradient(125deg,rgba(255,156,206,.12),rgba(197,184,255,.13),rgba(157,244,215,.08))}.endcap h2{font-size:clamp(26px,4vw,46px);line-height:1.12;letter-spacing:-.05em;margin:15px 0}.endcap p{color:#dde2ee;max-width:560px;margin:5px auto 18px}.endcap .btn{font-size:15px;padding:15px 24px}.footer{text-align:center;color:#a7b0c6;font-size:12px;padding:37px 0 0}.locked{opacity:.5}.hide{display:none!important}
+    .overlay{position:fixed;inset:0;background:rgba(5,7,19,.83);display:grid;place-items:center;padding:18px;z-index:60;backdrop-filter:blur(12px)}.modal{position:relative;background:linear-gradient(138deg,#302346,#142e37);max-width:610px;width:100%;border:1px solid rgba(255,156,206,.48);border-radius:24px;padding:43px 30px;text-align:center;box-shadow:0 22px 100px rgba(0,0,0,.7)}.modal h2{font-size:clamp(35px,7vw,65px);line-height:1.1;letter-spacing:-.055em;margin:13px 0;color:#ffd0e5}.modal p{font-size:17px;color:#f6eefd}.close{position:absolute;right:15px;top:12px;background:rgba(255,255,255,.11);color:white;border:1px solid var(--border);width:37px;height:37px;border-radius:50%}.spark{font-size:35px}.confetti{position:fixed;width:9px;height:16px;pointer-events:none;z-index:70;animation:fall linear forwards}.float-heart{position:fixed;bottom:-40px;z-index:3;pointer-events:none;animation:rise linear forwards;opacity:0}.hidden-audio{display:none}
+    @keyframes blink{50%{opacity:0}}@keyframes bob{50%{transform:translateY(-8px)}}@keyframes pulse{50%{transform:scale(1.12)}}@keyframes flicker{to{transform:scaleY(.87) rotate(4deg)}}@keyframes rise{10%{opacity:.8}100%{opacity:0;transform:translateY(-110vh) rotate(30deg)}}@keyframes fall{to{transform:translateY(115vh) rotate(900deg);opacity:.15}}@keyframes openLetter{from{opacity:0;transform:scaleY(.2) translateY(-20px)}to{opacity:1;transform:scaleY(1) translateY(0)}}
+    @media(max-width:830px){.grid,.memory-grid{grid-template-columns:1fr 1fr}.grid .tile:last-child{grid-column:1/-1}}@media(max-width:580px){.shell{padding:15px 14px 45px}.hero{padding-top:19px}.hero h1{font-size:43px}.grid,.memory-grid{grid-template-columns:1fr}.grid .tile:last-child{grid-column:auto}.terminal .term-body{font-size:12.5px;padding:17px 13px}.small-status{display:none}.term-footer{padding:13px}.panel{padding:18px}.modal{padding:35px 18px}.hearts{font-size:23px}.term-title{font-size:10px}.music-control .pill{font-size:12px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+  
+    .stage:not(.active){display:none!important}
+    .memory-grid{grid-template-columns: minmax(0,520px);justify-content:center}
+    .memory-photo{display: block;width: 100%;height: auto;max-height: 75vh;object-fit: contain;object-position: center;border-radius: 14px;margin: 0 0 12px;border: 1px solid rgba(255, 255, 255, 0.13);background: #101827;}
+    .memory-placeholder{width:100%;aspect-ratio:4/3;border-radius:14px;display:grid;place-items:center;margin-bottom:12px;background:linear-gradient(120deg,#322849,#1a3541);color:#ffe0f0;text-align:center;padding:20px}
+    .memory{animation:stepIn .45s ease both;min-width:0}.memory-progress{text-align:center;color:var(--mint);font:700 12px ui-monospace,monospace;margin:14px 0}
+    .memory-controls{display:flex;justify-content:center;margin:16px 0 0}
+
+    .step-actions{display:flex;justify-content:center;margin:25px auto 38px}
+    .step-actions .btn{padding:14px 25px}
+    .stage{animation:stepIn .55s ease both}
+    @keyframes stepIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .step-counter{text-align:center;color:var(--mint);font:700 12px ui-monospace,monospace;letter-spacing:.12em;margin:8px 0 18px}
+    .ai-console{max-width:680px;text-align:left;margin:28px auto 0;padding:17px 19px;border:1px solid rgba(157,244,215,.33);border-radius:15px;background:linear-gradient(140deg,rgba(13,23,43,.92),rgba(30,19,48,.9));box-shadow:0 8px 40px rgba(0,0,0,.18);font:12px ui-monospace,Menlo,Consolas,monospace}
+    .ai-console-title,.ai-console-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--mint);letter-spacing:.05em}
+    .ai-console-title{padding-bottom:13px;border-bottom:1px solid rgba(157,244,215,.19);font-weight:800}
+    .ai-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:15px}
+    .ai-metrics>div{background:rgba(255,255,255,.035);padding:12px 8px;border-radius:9px;min-width:0}
+    .ai-metrics small{display:block;color:#a9b4cd;font-size:10px;margin-bottom:8px}
+    .ai-metrics strong{display:block;color:#ffd5e8;font-size:clamp(13px,2.5vw,19px)}
+    .ai-graph{height:62px;display:flex;align-items:center;justify-content:space-between;gap:4px;margin:16px 0 12px;padding:0 3px;border-bottom:1px solid rgba(157,244,215,.2)}
+    .ai-graph span{height:35%;flex:1;background:linear-gradient(0deg,var(--mint),var(--pink));border-radius:4px 4px 0 0;animation:pulseAi 1.9s ease-in-out infinite alternate}
+    .ai-graph span:nth-child(4n){height:88%;animation-delay:-.6s}.ai-graph span:nth-child(3n){height:58%;animation-delay:-1.3s}.ai-graph span:nth-child(5n){height:76%;animation-delay:-.9s}
+    @keyframes pulseAi{to{height:22%;opacity:.65}}
+    .ai-console-bottom{font-size:10px;color:#b9c1d8}
+    @media(max-width:500px){.ai-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.ai-console{padding:13px}.ai-console-title{font-size:10px}}
+    @media(prefers-reduced-motion:reduce){.ai-graph span{animation:none}}
+  </style>
+</head>
+<body>
+<audio id="music" src="assets/Music.m4a" loop preload="none"></audio>
+<div class="shell">
+  <header>
+    <div class="brand">LOVE<span>.ai</span><span style="color:#a6b1c9"> / model-v1.0</span> <span aria-hidden="true">♡</span></div>
+    <div class="music-control"><span class="small-status">● INFERENCE ENGINE READY</span><button class="pill" id="musicBtn" aria-pressed="false">♫ Play our song</button></div>
+  </header>
+
+  <div class="stage active" id="stageIntro"><div class="step-counter">PIPELINE 01 / 07 · MODEL INITIALIZATION</div>
+  <section class="hero" aria-label="Birthday greeting">
+    <span class="eyebrow">✦ FINE-TUNED ON A MILLION LITTLE REASONS I LOVE YOU ✦</span>
+    <h1>Happy Birthday,<br><span class="gradient" id="heroName">my favorite human.</span></h1>
+    <p>An experimental AI love model, trained on smiles, memories, and butterflies. Its only prediction? A lifetime of choosing you. Ready to run inference?</p>
+    <div class="hearts" aria-hidden="true">💗 ✨ 💚 ✨ 💜</div>
+    <div class="ai-console" aria-label="AI model telemetry">
+      <div class="ai-console-title"><span>◉ LOVE.ai / SYSTEM DIAGNOSTICS</span><span>v1.0 · ON DEVICE</span></div>
+      <div class="ai-metrics"><div><small>LOVE CONFIDENCE</small><strong>99.99%</strong></div><div><small>EMOTIONAL LATENCY</small><strong>0 ms ♡</strong></div><div><small>INFERENCE MODE</small><strong>ROMANTIC</strong></div></div>
+      <div class="ai-graph" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="ai-console-bottom">✓ Weights loaded <span>✓ Soulmate signal locked</span> <span>✓ Next step requires your click</span></div>
+    </div>
+  </section>
+
+  <div class="step-actions"><button class="btn" id="startMission">▶ Initialize LOVE.ai →</button></div></div>
+  <div class="stage" id="stageTerminal"><div class="step-counter">PIPELINE 02 / 07 · AUTHENTICATION LAYER</div>
+  <section class="terminal" aria-label="Romantic birthday terminal">
+    <div class="term-top"><div class="dots" aria-hidden="true"><i></i><i></i><i></i></div><span class="term-title">birthday_surprise.sh — bash — 100% love</span><span style="font-size:13px;color:#d4bde2">♡</span></div>
+    <div class="term-body" id="terminal" role="log" aria-live="polite" aria-relevant="additions"></div>
+    <form class="term-footer" id="unlockForm" autocomplete="off">
+      <label for="passcode">SECRET KEY &gt;</label>
+      <input class="codebox" id="passcode" type="text" maxlength="20" placeholder="Hint: LOVE" aria-label="Enter the secret password">
+      <button class="btn" type="submit" id="unlockBtn">♡ Decrypt my heart</button>
+      <span class="msg" id="unlockMsg" role="status">Hint: the four-letter thing I feel for you.</span>
+    </form>
+  </section>
+  <p class="tiny">🔐 Just for fun: this is a pretend hacker terminal, not a real password or a security system.</p>
+
+  </div>
+  <div class="stage" id="stageLetter"><div class="step-counter">PIPELINE 03 / 07 · EMOTION DECODER</div>
+    <div class="section-heading"><h2>Decode a love letter 💌</h2><p>Emotion classifier result: 99.99% head-over-heels.</p></div>
+    <div class="tile"><div class="iconish">💌</div><h3>love_letter.txt</h3><p>Press the button to open your private message.</p><button class="soft-button locked" id="letterBtn" disabled>♡ Open letter</button><p class="unlock-needed" id="letterHint">🔒 Encrypted</p></div>
+    <section class="panel hide" id="letterPanel" aria-label="Love letter"><h3>💌 Letter successfully decrypted</h3><div class="letter" id="letterText"></div><div class="step-actions"><button class="btn" id="letterNext">♡ View our memories →</button></div></section>
+  </div>
+  <div class="stage" id="stageMemories"><div class="step-counter">PIPELINE 04 / 07 · MEMORY RETRIEVAL</div>
+    <div class="section-heading"><h2>Vector search: our memories 📸</h2><p>Unlock the little moments that mean everything.</p></div>
+    <div class="tile"><div class="iconish">📸</div><h3>memories.zip</h3><p>Tap below to unzip our moments together.</p><button class="soft-button locked" id="memoryBtn" disabled>✧ Unzip memories</button><p class="unlock-needed" id="memoryHint">🔒 Encrypted</p></div>
+    <section class="panel hide" id="memoryPanel" aria-label="Our memories"><h3>📸 Shared memories found</h3><p class="memory-progress" id="memoryProgress" aria-live="polite"></p><div class="memory-grid" id="memoryCards"></div><div class="memory-controls"><button class="soft-button hide" id="revealNextMemory">🔎 Retrieve next memory →</button></div><div class="step-actions"><button class="btn hide" id="memoryNext">💗 Play a little game →</button></div></section>
+  </div>
+  <div class="stage" id="stageGame"><div class="step-counter">PIPELINE 05 / 07 · REINFORCEMENT LEARNING</div>
+    <div class="section-heading"><h2>Train the heart agent 💗</h2><p>Find five hearts to unlock the next surprise.</p></div>
+    <div class="tile"><div class="iconish">💗</div><h3>heart_catcher.exe</h3><p>A tiny challenge made just for you.</p><button class="soft-button" id="heartGameBtn">▶ Play the game</button><p class="unlock-needed">💫 5 hearts to collect</p></div>
+    <section class="panel hide" id="gamePanel" aria-label="Catch the hearts game"><h3>💗 Heart catcher — 5 hearts to win</h3><p class="tiny">Tap or click the glowing heart every time it appears.</p><div class="game" id="game" aria-label="Heart catching play area"></div><div class="progress-track" aria-label="Game progress"><div class="progress-fill" id="gameProgress"></div></div><p class="goal-line" id="gameStatus" role="status">Hearts caught: 0 / 5</p><div class="step-actions"><button class="btn hide" id="gameNext">🎂 Time to make a wish →</button></div></section>
+  </div>
+  <div class="stage" id="stageCake"><div class="step-counter">PIPELINE 06 / 07 · WISH GENERATION</div>
+  <div class="section-heading"><h2>Make a wish, birthday love <span style="color:var(--pink)">🎂</span></h2><p>There is one more tiny mission: tap all three candle flames to blow them out.</p></div>
+  <section class="panel" aria-label="Interactive birthday cake">
+    <div class="cake-stage">
+      <svg viewBox="0 0 390 293" role="img" aria-label="A pastel layered birthday cake with three clickable candles" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="195" cy="267" rx="156" ry="14" fill="#7669ae" opacity=".28"/>
+        <path d="M65 190Q62 180 79 180H310Q326 180 324 190L316 258Q315 269 303 269H87Q75 269 74 258Z" fill="#d3b5ef"/>
+        <path d="M74 217Q99 229 125 216T177 218T231 217T284 218T318 214L316 258Q315 268 303 268H87Q75 269 74 258Z" fill="#bd98e8"/>
+        <path d="M72 185Q72 170 90 170H303Q321 170 321 187V204Q311 213 302 205Q289 225 279 204Q261 226 244 207Q226 226 211 204Q194 221 180 204Q158 225 145 205Q125 224 113 205Q96 223 84 204Q73 210 72 197Z" fill="#fff0f7"/>
+        <rect x="108" y="116" width="174" height="58" rx="18" fill="#ffa9cb"/><path d="M108 139Q122 152 137 138T167 138T197 139T227 138T257 137T282 138V154Q282 164 269 164H120Q108 164 108 153Z" fill="#ffe4ef"/>
+        <ellipse cx="195" cy="114" rx="86" ry="17" fill="#ffbed8"/><ellipse cx="195" cy="114" rx="76" ry="12" fill="#ffe9f4"/>
+        <g aria-label="Candle 1" tabindex="0" role="button" class="candle-hotspot" data-candle="0"><rect x="151" y="82" width="15" height="36" rx="3" fill="#b9fae5"/><path d="M154 87V113M162 87V113" stroke="#70dbc0" stroke-width="2"/><g class="flame" data-flame="0"><ellipse cx="158.5" cy="72" rx="8" ry="14" fill="#ffbb76"/><ellipse cx="158.5" cy="76" rx="4" ry="9" fill="#fff9b7"/></g><rect x="146" y="55" width="26" height="64" fill="transparent"/></g>
+        <g aria-label="Candle 2" tabindex="0" role="button" class="candle-hotspot" data-candle="1"><rect x="188" y="73" width="15" height="42" rx="3" fill="#c8b4ff"/><path d="M192 80V109M199 80V109" stroke="#9981e8" stroke-width="2"/><g class="flame" data-flame="1"><ellipse cx="195.5" cy="63" rx="8" ry="14" fill="#ffbb76"/><ellipse cx="195.5" cy="67" rx="4" ry="9" fill="#fff9b7"/></g><rect x="182" y="48" width="27" height="68" fill="transparent"/></g>
+        <g aria-label="Candle 3" tabindex="0" role="button" class="candle-hotspot" data-candle="2"><rect x="225" y="82" width="15" height="36" rx="3" fill="#ffb7d4"/><path d="M228 87V113M236 87V113" stroke="#e58eae" stroke-width="2"/><g class="flame" data-flame="2"><ellipse cx="232.5" cy="72" rx="8" ry="14" fill="#ffbb76"/><ellipse cx="232.5" cy="76" rx="4" ry="9" fill="#fff9b7"/></g><rect x="219" y="55" width="27" height="64" fill="transparent"/></g>
+        <path d="M130 188Q140 182 150 190M239 190Q250 182 261 190" stroke="#ffb5d3" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M176 220L195 234 213 220" fill="none" stroke="#ffe0ef" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><g fill="#fff2b9"><circle cx="113" cy="243" r="3"/><circle cx="275" cy="243" r="3"/><circle cx="256" cy="182" r="2"/></g>
+      </svg>
+      <p class="wishes" id="wishMsg" role="status">🕯️ 3 candles still glowing</p>
+      <button class="soft-button" id="resetCandles" type="button">↻ Relight candles</button>
+    </div>
+  </section>
+
+  <div class="step-actions"><button class="btn hide" id="cakeNext">🎁 One final surprise →</button></div></div>
+  <div class="stage" id="stageFinal"><div class="step-counter">PIPELINE 07 / 07 · GENERATE FINAL RESPONSE</div>
+  <section class="endcap"><div style="font-size:37px">🎁 💖 ✨</div><h2>Final model output: <span class="gradient">infinite love.</span></h2><p>One final command to reveal the most important message of all.</p><button class="btn" id="finalBtn" disabled>♡ Unlock final birthday surprise</button><div class="tiny" id="finalHint">Enter the secret key above to activate your final surprise.</div></section>
+  </div>
+  <div class="footer">Architected by a love-struck AI Engineer ♡ | Trained on our memories, and dedicated to <span id="footerName">you</span>. <br> Music starts only when you press play ♫</div>
+</div>
+
+<div class="overlay hide" id="overlay" role="presentation"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="close" id="closeModal" aria-label="Close birthday surprise">✕</button><div class="spark" aria-hidden="true">💗 🎂 💫</div><h2 id="modalTitle">Happy Birthday, my love!</h2><p id="modalText"></p><div style="font-size:28px;margin:19px 0" aria-hidden="true">💕 ♡ ✨ ♡ 💕</div><button class="btn" id="replayFinal">✦ More birthday magic</button></div></div>
+
+<script>
+  // ✨ EDIT ONLY THIS SECTION TO PERSONALIZE THE SURPRISE ✨
+  const SETTINGS = {
+    partnerName: "Ashish",
+    yourName: "Krutika",
+    secretCode: "LOVE",
+    birthdayNote: "You are my favorite person, my happiest coincidence, and my forever kind of magic. Every little adventure is better because it's with you. Here's to all the memories we've made and all the ones still waiting for us. I love you more than words — and even code — could ever express. ❤️",
+    // Place your real photos in the photos/ folder. Use the exact filenames below.
+    // Photos are revealed ONE BY ONE; missing files display a styled placeholder.
+    memories: [
+      {icon:"❤️", title:"Our first date", image:"photos/IMG_1.JPG", text:"The day our beautiful story began."},
+      {icon:"🌍", title:"Our favorite adventure", image:"photos/IMG_2.jpeg", text:"Any place feels magical when I'm there with you."},
+      {icon:"💗", title:"My favorite moment", image:"photos/IMG_3.jpeg", text:"Even the smallest moments with you mean everything."}
+    ],
+    finalMessage: "Wishing you a year full of joy, gentle mornings, wild dreams, and love that never runs out. The best part of my life is sharing it with you. Happy Birthday, sweetheart!"
+  };
+  // ✨ END OF PERSONALIZATION ✨
+
+  const $=id=>document.getElementById(id);
+  const safeName=String(SETTINGS.partnerName).trim()||"My Love";
+  $("heroName").textContent=safeName+". ♡";
+  $("footerName").textContent=safeName;
+  $("modalTitle").textContent="Happy Birthday, "+safeName+"!";
+  $("modalText").textContent=SETTINGS.finalMessage;
+  let unlocked=false,heartsCaught=0,blown=new Set(),bootStop=false;
+  function addTerminal(text,isCmd=false){let line=document.createElement('div');line.className='term-line';if(isCmd){let s=document.createElement('span');s.className='pref';s.textContent='you@heart:~$ ';line.appendChild(s)}let t=document.createElement('span');t.textContent=text;line.appendChild(t);$("terminal").appendChild(line);return line}
+  const bootLines=["[MODEL] Loading LOVE.ai neural architecture...", "[DATA] Memory embeddings retrieved ........ [OK]", "[RAG] Searching favorite moments ......... [3 MATCHES]", "[ALIGNMENT] Romantic intent .............. [100%]", "[INFERENCE] Heartbeat response ........... [POSITIVE]", "[SECURITY] Encrypted birthday payload found", "[AUTH] Enter passphrase to continue. Hint: LOVE ♡"];
+  function typeBoot(){let n=0;const next=()=>{if(bootStop||n>=bootLines.length)return;const s=bootLines[n++];let line=addTerminal('',false);let t=line.lastElementChild,i=0;const tick=()=>{if(bootStop){t.textContent=s;return}t.textContent=s.slice(0,i+=2);if(i<s.length)setTimeout(tick,16);else setTimeout(next,240)};tick()};next()}
+  const stageIds=['stageIntro','stageTerminal','stageLetter','stageMemories','stageGame','stageCake','stageFinal'];
+  let currentStep=0;
+  function showStep(index){
+    if(index<0 || index>=stageIds.length || index>currentStep+1)return;
+    currentStep=index;
+    stageIds.forEach((id,n)=>{$(id).classList.toggle('active',n===index)});
+    window.scrollTo({top:0,behavior:'smooth'});
+    const heading=$(stageIds[index]).querySelector('.step-counter');
+    if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true})}
+  }
+  $('startMission').addEventListener('click',()=>showStep(1));
+  $('letterNext').addEventListener('click',()=>{if(!$('letterPanel').classList.contains('hide'))showStep(3)});
+  $('memoryNext').addEventListener('click',()=>{if(memoryIndex>=SETTINGS.memories.length-1)showStep(4)});
+  $('gameNext').addEventListener('click',()=>showStep(5));
+  $('cakeNext').addEventListener('click',()=>showStep(6));
+  typeBoot();
+  $("unlockForm").addEventListener('submit',e=>{e.preventDefault();let entry=$("passcode").value.trim().toUpperCase();if(entry!==SETTINGS.secretCode.trim().toUpperCase()){addTerminal('access denied — try LOVE ♡',true);$("unlockMsg").textContent="Not quite! The hint is LOVE ♡";return}if(unlocked){$("unlockMsg").textContent="Already unlocked, sweetheart ♡";return}bootStop=true;unlocked=true;addTerminal('decrypt --key '+entry,true);addTerminal('♡ AUTHORIZED. YOU HAVE ROOT ACCESS TO MY HEART. ♡');$("unlockMsg").textContent="✓ Access granted. Explore the unlocked files below!";$("unlockMsg").classList.add('success');$("unlockBtn").textContent='♡ Unlocked!';$("passcode").disabled=true;$("unlockBtn").disabled=true;['letterBtn','memoryBtn','finalBtn'].forEach(id=>{$(id).disabled=false;$(id).classList.remove('locked')});$('letterHint').textContent='🔓 Ready to open';$('memoryHint').textContent='🔓 Ready to open';$('finalHint').textContent='Your final surprise is waiting ♡';burstConfetti(48);floatHearts(12);setTimeout(()=>showStep(2),650)});
+  function reveal(panelId){$(panelId).classList.remove('hide');$(panelId).scrollIntoView({behavior:'smooth',block:'center'})}
+  $("letterBtn").addEventListener('click',()=>{let area=$('letterText');area.replaceChildren();let intro=document.createElement('div');intro.textContent='To '+safeName+',';area.appendChild(intro);let note=document.createElement('p');note.textContent=SETTINGS.birthdayNote;area.appendChild(note);let sign=document.createElement('div');sign.className='signature';sign.textContent='Forever yours, '+SETTINGS.yourName+' ♡';area.appendChild(sign);reveal('letterPanel');floatHearts(9)});
+  // One memory per click; the next pipeline stage is hidden until all memories are retrieved.
+  let memoryIndex=-1;
+  function revealMemory(){
+    if(memoryIndex+1>=SETTINGS.memories.length)return;
+    memoryIndex++;
+    const m=SETTINGS.memories[memoryIndex];
+    const cards=$('memoryCards');cards.replaceChildren();
+    const art=document.createElement('article');art.className='memory';
+    if(m.image){
+      const img=document.createElement('img');img.className='memory-photo';img.src=m.image;
+      img.alt=m.title;img.loading='eager';
+      img.onerror=()=>{const fallback=document.createElement('div');fallback.className='memory-placeholder';fallback.textContent='📸 Add your photo: '+m.image;img.replaceWith(fallback)};
+      art.appendChild(img);
+    }else{
+      const fallback=document.createElement('div');fallback.className='memory-placeholder';fallback.textContent=m.icon||'💗';art.appendChild(fallback)
+    }
+    const h=document.createElement('h4');h.textContent=m.title;
+    const desc=document.createElement('p');desc.textContent=m.text;
+    art.append(h,desc);cards.appendChild(art);
+    $('memoryProgress').textContent='[VECTOR DB] Memory '+(memoryIndex+1)+' / '+SETTINGS.memories.length+' retrieved ✓';
+    const done=memoryIndex===SETTINGS.memories.length-1;
+    $('revealNextMemory').classList.toggle('hide',done);
+    $('memoryNext').classList.toggle('hide',!done);
+    if(done){burstConfetti(42);floatHearts(8)}
+  }
+  $('memoryBtn').addEventListener('click',()=>{
+    memoryIndex=-1;
+    $('memoryNext').classList.add('hide');
+    $('revealNextMemory').classList.add('hide');
+    reveal('memoryPanel');
+    if(SETTINGS.memories.length){revealMemory()}else{$('memoryProgress').textContent='No memories configured yet';$('memoryNext').classList.remove('hide')}
+  });
+  $('revealNextMemory').addEventListener('click',revealMemory);
+  function positionHeart(){let scene=$('game');scene.replaceChildren();const button=document.createElement('button');button.type='button';button.className='heart-target';button.textContent=['💗','💖','💝','💕','💘'][heartsCaught%5];button.setAttribute('aria-label','Catch heart '+(heartsCaught+1));const bounds=scene.getBoundingClientRect();const w=Math.max(0,bounds.width-88),h=Math.max(0,bounds.height-88);button.style.left=12+Math.random()*w+'px';button.style.top=9+Math.random()*h+'px';button.addEventListener('click',catchHeart);scene.appendChild(button)}
+  function catchHeart(){heartsCaught++;$('gameProgress').style.width=Math.min(100,heartsCaught*20)+'%';if(heartsCaught>=5){$('gameStatus').textContent="You caught them all! ♥ Secret unlocked: You had my heart all along.";$('game').replaceChildren();let label=document.createElement('p');label.textContent='💘 Achievement unlocked: Heart Keeper';label.style.cssText='text-align:center;padding:75px 8px;font-size:19px;color:var(--pink);font-weight:900';$('game').appendChild(label);burstConfetti(70);floatHearts(15);$('gameNext').classList.remove('hide')}else{$('gameStatus').textContent='Hearts caught: '+heartsCaught+' / 5';positionHeart()}}
+  $('heartGameBtn').addEventListener('click',()=>{heartsCaught=0;$('gameNext').classList.add('hide');$('gameProgress').style.width='0%';$('gameStatus').textContent='Hearts caught: 0 / 5';reveal('gamePanel');positionHeart()});
+  function extinguish(index){if(blown.has(index))return;blown.add(index);document.querySelector(`[data-flame="${index}"]`).classList.add('off');$('wishMsg').textContent=blown.size===3?'✨ All candles out! Your wish is on its way, sweetheart. ♡':`🕯️ ${3-blown.size} candle${3-blown.size===1?'':'s'} left — keep making wishes!`;if(blown.size===3){burstConfetti(110);floatHearts(18);$('cakeNext').classList.remove('hide')}}
+  document.querySelectorAll('.candle-hotspot').forEach(el=>{el.addEventListener('click',()=>extinguish(+el.dataset.candle));el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();extinguish(+el.dataset.candle)}})});
+  $('resetCandles').addEventListener('click',()=>{blown.clear();$('cakeNext').classList.add('hide');document.querySelectorAll('.flame').forEach(el=>el.classList.remove('off'));$('wishMsg').textContent='🕯️ 3 candles still glowing'});
+  const music=$('music');music.volume=.34;
+  function musicUI(isPlaying){$('musicBtn').textContent=isPlaying?'♫ Pause our song':'♫ Play our song';$('musicBtn').setAttribute('aria-pressed',String(isPlaying))}
+  $('musicBtn').addEventListener('click',async()=>{if(!music.paused){music.pause();musicUI(false);return}try{await music.play();musicUI(true)}catch(e){musicUI(false);$('musicBtn').textContent='♫ Music unavailable';console.warn('Could not play audio',e)}});
+  function floatHearts(count){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;for(let i=0;i<count;i++)setTimeout(()=>{const heart=document.createElement('span');heart.className='float-heart';heart.textContent=['💗','💖','💜','💚','✨'][Math.floor(Math.random()*5)];heart.style.cssText=`left:${Math.random()*100}vw;font-size:${14+Math.random()*18}px;animation-duration:${3.5+Math.random()*3}s`;document.body.append(heart);setTimeout(()=>heart.remove(),7000)},i*115)}
+  function burstConfetti(n=75){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const colors=['#ff9cce','#c5b8ff','#9df4d7','#ffe4a8','#ffd9ef'];for(let i=0;i<n;i++){let bit=document.createElement('i');bit.className='confetti';bit.style.cssText=`top:-30px;left:${Math.random()*100}vw;background:${colors[i%colors.length]};animation-duration:${2.6+Math.random()*3}s;animation-delay:${Math.random()*.55}s;transform:rotate(${Math.random()*180}deg)`;document.body.append(bit);setTimeout(()=>bit.remove(),6500)}}
+  let prevFocus=null;function openFinal(){prevFocus=document.activeElement;$('overlay').classList.remove('hide');$('closeModal').focus();burstConfetti(150);floatHearts(18)}function closeFinal(){$('overlay').classList.add('hide');if(prevFocus)prevFocus.focus()}
+  $('finalBtn').addEventListener('click',openFinal);$('replayFinal').addEventListener('click',()=>{burstConfetti(150);floatHearts(18)});$('closeModal').addEventListener('click',closeFinal);$('overlay').addEventListener('click',e=>{if(e.target===$('overlay'))closeFinal()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('overlay').classList.contains('hide'))closeFinal();if(e.key==='Tab'&&!$('overlay').classList.contains('hide')){const nodes=[...$('overlay').querySelectorAll('button:not([disabled])')];if(e.shiftKey&&document.activeElement===nodes[0]){e.preventDefault();nodes.at(-1).focus()}else if(!e.shiftKey&&document.activeElement===nodes.at(-1)){e.preventDefault();nodes[0].focus()}}});
+</script>
+</body>
+</html>

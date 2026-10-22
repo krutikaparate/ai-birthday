@@ -1,0 +1,5 @@
+Add your real images here using these filenames:
+first-date.jpg
+vacation.jpg
+favorite-memory.jpg
+You can change filenames or add additional memories in SETTINGS.memories inside index.html.
